@@ -1,0 +1,12 @@
+Source: ros-foxy-openvslam
+Section: misc
+Priority: optional
+Maintainer: ymd-stella <world.applepie@gmail.com>
+Build-Depends: debhelper (>= 9.0.0), cmake, libeigen3-dev, libgoogle-glog-dev, libopencv-dev, libyaml-cpp-dev, ros-foxy-libg2o, ros-foxy-ros-workspace
+Homepage: https://openvslam-community.readthedocs.io/
+Standards-Version: 3.9.2
+
+Package: ros-foxy-openvslam
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libeigen3-dev, libgoogle-glog-dev, libopencv-dev, libyaml-cpp-dev, ros-foxy-libg2o, ros-foxy-ros-workspace
+Description: OpenVSLAM: A Versatile Visual SLAM Framework
