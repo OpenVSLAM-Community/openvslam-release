@@ -8,7 +8,7 @@ Overview
     :width: 640px
     :align: center
 
-.. image:: https://raw.githubusercontent.com/wiki/OpenVSLAM-Community/openvslam/media/tracking.gif
+.. image:: https://j.gifs.com/81m1QL.gif
     :width: 640px
     :align: center
 
@@ -50,7 +50,7 @@ Tutorial
 
 Please see :ref:`Simple Tutorial <chapter-simple-tutorial>`.
 
-| A sample ORB vocabulary file can be downloaded from `here <https://github.com/OpenVSLAM-Community/DBoW2_orb_vocab/raw/main/orb_vocab.dbow2>`__.
+| A sample ORB vocabulary file can be downloaded from `here <https://github.com/OpenVSLAM-Community/FBoW_orb_vocab/raw/main/orb_vocab.fbow>`__.
 | Sample datasets are also provided at `here <https://drive.google.com/open?id=1A_gq8LYuENePhNHsuscLZQPhbJJwzAq4>`__. 
 
 If you would like to run visual SLAM with standard benchmarking datasets (e.g. KITTI Odometry dataset), please see :ref:`SLAM with standard datasets <section-example-standard-datasets>`.
