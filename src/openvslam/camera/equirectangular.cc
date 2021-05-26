@@ -18,11 +18,11 @@ equirectangular::equirectangular(const std::string& name, const color_order_t& c
 }
 
 equirectangular::equirectangular(const YAML::Node& yaml_node)
-    : equirectangular(yaml_node["Camera.name"].as<std::string>(),
+    : equirectangular(yaml_node["name"].as<std::string>(),
                       load_color_order(yaml_node),
-                      yaml_node["Camera.cols"].as<unsigned int>(),
-                      yaml_node["Camera.rows"].as<unsigned int>(),
-                      yaml_node["Camera.fps"].as<double>()) {}
+                      yaml_node["cols"].as<unsigned int>(),
+                      yaml_node["rows"].as<unsigned int>(),
+                      yaml_node["fps"].as<double>()) {}
 
 equirectangular::~equirectangular() {
     spdlog::debug("DESTRUCT: camera::equirectangular");
@@ -100,6 +100,20 @@ nlohmann::json equirectangular::to_json() const {
             {"focal_x_baseline", focal_x_baseline_},
             {"num_grid_cols", num_grid_cols_},
             {"num_grid_rows", num_grid_rows_}};
+}
+
+std::ostream& operator<<(std::ostream& os, const equirectangular& params) {
+    os << "- name: " << params.name_ << std::endl;
+    os << "- setup: " << params.get_setup_type_string() << std::endl;
+    os << "- fps: " << params.fps_ << std::endl;
+    os << "- cols: " << params.cols_ << std::endl;
+    os << "- rows: " << params.rows_ << std::endl;
+    os << "- color: " << params.get_color_order_string() << std::endl;
+    os << "- model: " << params.get_model_type_string() << std::endl;
+    os << "- focal x baseline: " << params.focal_x_baseline_ << std::endl;
+    os << "- num grid cols: " << params.num_grid_cols_ << std::endl;
+    os << "- num grid rows: " << params.num_grid_rows_ << std::endl;
+    return os;
 }
 
 } // namespace camera

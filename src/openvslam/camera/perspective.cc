@@ -31,22 +31,22 @@ perspective::perspective(const std::string& name, const setup_type_t& setup_type
 }
 
 perspective::perspective(const YAML::Node& yaml_node)
-    : perspective(yaml_node["Camera.name"].as<std::string>(),
+    : perspective(yaml_node["name"].as<std::string>(),
                   load_setup_type(yaml_node),
                   load_color_order(yaml_node),
-                  yaml_node["Camera.cols"].as<unsigned int>(),
-                  yaml_node["Camera.rows"].as<unsigned int>(),
-                  yaml_node["Camera.fps"].as<double>(),
-                  yaml_node["Camera.fx"].as<double>(),
-                  yaml_node["Camera.fy"].as<double>(),
-                  yaml_node["Camera.cx"].as<double>(),
-                  yaml_node["Camera.cy"].as<double>(),
-                  yaml_node["Camera.k1"].as<double>(),
-                  yaml_node["Camera.k2"].as<double>(),
-                  yaml_node["Camera.p1"].as<double>(),
-                  yaml_node["Camera.p2"].as<double>(),
-                  yaml_node["Camera.k3"].as<double>(),
-                  yaml_node["Camera.focal_x_baseline"].as<double>(0.0)) {}
+                  yaml_node["cols"].as<unsigned int>(),
+                  yaml_node["rows"].as<unsigned int>(),
+                  yaml_node["fps"].as<double>(),
+                  yaml_node["fx"].as<double>(),
+                  yaml_node["fy"].as<double>(),
+                  yaml_node["cx"].as<double>(),
+                  yaml_node["cy"].as<double>(),
+                  yaml_node["k1"].as<double>(),
+                  yaml_node["k2"].as<double>(),
+                  yaml_node["p1"].as<double>(),
+                  yaml_node["p2"].as<double>(),
+                  yaml_node["k3"].as<double>(),
+                  yaml_node["focal_x_baseline"].as<double>(0.0)) {}
 
 perspective::~perspective() {
     spdlog::debug("DESTRUCT: camera::perspective");
@@ -209,6 +209,30 @@ nlohmann::json perspective::to_json() const {
             {"p1", p1_},
             {"p2", p2_},
             {"k3", k3_}};
+}
+
+std::ostream& operator<<(std::ostream& os, const perspective& params) {
+    os << "- name: " << params.name_ << std::endl;
+    os << "- setup: " << params.get_setup_type_string() << std::endl;
+    os << "- fps: " << params.fps_ << std::endl;
+    os << "- cols: " << params.cols_ << std::endl;
+    os << "- rows: " << params.rows_ << std::endl;
+    os << "- color: " << params.get_color_order_string() << std::endl;
+    os << "- model: " << params.get_model_type_string() << std::endl;
+    os << "  - fx: " << params.fx_ << std::endl;
+    os << "  - fy: " << params.fy_ << std::endl;
+    os << "  - cx: " << params.cx_ << std::endl;
+    os << "  - cy: " << params.cy_ << std::endl;
+    os << "  - k1: " << params.k1_ << std::endl;
+    os << "  - k2: " << params.k2_ << std::endl;
+    os << "  - p1: " << params.p1_ << std::endl;
+    os << "  - p2: " << params.p2_ << std::endl;
+    os << "  - k3: " << params.k3_ << std::endl;
+    os << "  - min x: " << params.img_bounds_.min_x_ << std::endl;
+    os << "  - max x: " << params.img_bounds_.max_x_ << std::endl;
+    os << "  - min y: " << params.img_bounds_.min_y_ << std::endl;
+    os << "  - max y: " << params.img_bounds_.max_y_ << std::endl;
+    return os;
 }
 
 } // namespace camera
